@@ -3,13 +3,10 @@
 ```
 part0
 part1
-    info
-    unicafe
-    anecdotes
+  courseinfo
+  unicafe
+  anecdotes
 part2
-    phonebook
-    countries
-part3
-    etc
+  phonebook
+  countries
 ```
- 
