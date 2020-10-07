@@ -1,7 +1,13 @@
 # Run on: https://www.websequencediagrams.com/
 
 selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
-palvelin-->selain: Redirect-pyyntö
+
+note over palvelin:
+Palvelin luo uutta muistiinpanoa vastaavan
+olion ja laittaa sen muistiinpano-taulukkoon
+end note
+
+palvelin-->selain: Redirect-pyyntö (302)
 
 note over selain:
 selain lataa sivun uudestaan
