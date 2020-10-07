@@ -1,0 +1,11 @@
+# Run on: https://www.websequencediagrams.com/
+
+note over selain:
+selain suorittaa tapahtumankäsittelijän
+joka luo uuden muistiinpanon, lisää sen
+listaan ja päivittää ruudun sisällön
+end note
+
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+palvelin-->selain: Status Code 201
