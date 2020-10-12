@@ -16,6 +16,9 @@ const App = () => {
       <Display value={good} text="Good" />
       <Display value={neutral} text="Neutral" />
       <Display value={bad} text="Bad" />
+      <Display value={good + neutral + bad} text="All" />
+      <Display value={(good - bad) / (good + neutral + bad)} text="Average" />
+      <Display value={(good / (good + neutral + bad)) * 100} text="Positive" suffix="%" />
     </div>
   )
 }
@@ -26,11 +29,21 @@ const Button = (props) => (
   </button>
 )
 
-const Display = (props) => (
-  <div>
-    {props.text} {props.value}
-  </div>
-)
+const Display = (props) => {
+  if (isNaN(props.value)) {
+    return (
+      <div>
+        {props.text} ?
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      {props.text} {props.value} {props.suffix}
+    </div>
+  )
+}
 
 ReactDOM.render(<App />, 
   document.getElementById('root')
