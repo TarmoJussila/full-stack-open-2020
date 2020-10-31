@@ -30,12 +30,16 @@ const Statistics = (props) => {
   return (
     <div>
       <h1>Statistics</h1>
-      <StatisticLine value={props.good} text="Good" />
-      <StatisticLine value={props.neutral} text="Neutral" />
-      <StatisticLine value={props.bad} text="Bad" />
-      <StatisticLine value={props.good + props.neutral + props.bad} text="All" />
-      <StatisticLine value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} text="Average" />
-      <StatisticLine value={(props.good / (props.good + props.neutral + props.bad)) * 100} text="Positive" suffix="%" />
+      <table>
+        <tbody>
+          <tr><StatisticLine value={props.good} text="Good" /></tr>
+          <tr><StatisticLine value={props.neutral} text="Neutral" /></tr>
+          <tr><StatisticLine value={props.bad} text="Bad" /></tr>
+          <tr><StatisticLine value={props.good + props.neutral + props.bad} text="All" /></tr>
+          <tr><StatisticLine value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} text="Average" /></tr>
+          <tr><StatisticLine value={(props.good / (props.good + props.neutral + props.bad)) * 100} text="Positive" suffix="%" /></tr>
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -49,16 +53,18 @@ const Button = (props) => (
 const StatisticLine = (props) => {
   if (isNaN(props.value)) {
     return (
-      <div>
-        {props.text} ?
-      </div>
+      <>
+        <td>{props.text}</td>
+        <td>?</td>
+      </>
     )
   }
 
   return (
-    <div>
-      {props.text} {props.value} {props.suffix}
-    </div>
+    <>
+      <td>{props.text}</td>
+      <td>{props.value} {props.suffix}</td>
+    </>
   )
 }
 
