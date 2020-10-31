@@ -13,10 +13,14 @@ const App = (props) => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{props.anecdotes[selected]}</p>
       <p>Votes: {votes[selected]}</p>
       <Button handleClick={() => handleVote(selected)} text="Vote anecdote" />
       <Button handleClick={() => setSelected(getRandomInt(0, props.anecdotes.length))} text="Next anecdote" />
+      <h1>Anecdote with most votes</h1>
+      {props.anecdotes[votes.indexOf(Math.max(...votes))]}
+      <p>Votes: {Math.max(...votes)}</p>
     </div>
   )
 }
