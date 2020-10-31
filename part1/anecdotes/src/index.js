@@ -6,8 +6,8 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>{props.anecdotes[selected]}</h1>
-      <Button handleClick={() => setSelected(getRandomInt(0, props.anecdotes.length))} text="Next anedcote" />
+      <p>{props.anecdotes[selected]}</p>
+      <Button handleClick={() => setSelected(getRandomInt(0, props.anecdotes.length))} text="Next anecdote" />
     </div>
   )
 }
