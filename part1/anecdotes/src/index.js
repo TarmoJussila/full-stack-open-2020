@@ -6,9 +6,22 @@ const App = (props) => {
 
   return (
     <div>
-      {props.anecdotes[selected]}
+      <h1>{props.anecdotes[selected]}</h1>
+      <Button handleClick={() => setSelected(getRandomInt(0, props.anecdotes.length))} text="Next anedcote" />
     </div>
   )
+}
+
+const Button = (props) => (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
+)
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 const anecdotes = [
