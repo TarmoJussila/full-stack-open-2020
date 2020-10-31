@@ -30,12 +30,12 @@ const Statistics = (props) => {
   return (
     <div>
       <h1>Statistics</h1>
-      <Display value={props.good} text="Good" />
-      <Display value={props.neutral} text="Neutral" />
-      <Display value={props.bad} text="Bad" />
-      <Display value={props.good + props.neutral + props.bad} text="All" />
-      <Display value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} text="Average" />
-      <Display value={(props.good / (props.good + props.neutral + props.bad)) * 100} text="Positive" suffix="%" />
+      <StatisticLine value={props.good} text="Good" />
+      <StatisticLine value={props.neutral} text="Neutral" />
+      <StatisticLine value={props.bad} text="Bad" />
+      <StatisticLine value={props.good + props.neutral + props.bad} text="All" />
+      <StatisticLine value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} text="Average" />
+      <StatisticLine value={(props.good / (props.good + props.neutral + props.bad)) * 100} text="Positive" suffix="%" />
     </div>
   )
 }
@@ -46,7 +46,7 @@ const Button = (props) => (
   </button>
 )
 
-const Display = (props) => {
+const StatisticLine = (props) => {
   if (isNaN(props.value)) {
     return (
       <div>
