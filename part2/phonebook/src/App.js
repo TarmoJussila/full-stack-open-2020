@@ -44,34 +44,54 @@ const App = () => {
     setNewFilter(event.target.value)
   }
 
-  const namesToShow = newFilter.length === 0
+  const filteredPersons = newFilter.length === 0
     ? persons
     : persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
   
   return (
     <div>
       <h2>Phonebook</h2>
+      <Filter filterValue={newFilter} onFilterChange={handleFilterChange} />
+      <h3>Add a new</h3>
+      <PersonForm onSubmit={addName} nameValue={newName} numberValue={newNumber} onNameChange={handleNameChange} onNumberChange={handleNumberChange} />
+      <h3>Numbers</h3>
+      <PersonList persons={filteredPersons} />
+    </div>
+  )
+}
+
+const PersonForm = (props) => {
+  return (
+    <form onSubmit={props.onSubmit}>
       <div>
-        Filter shown with: <input value={newFilter} onChange={handleFilterChange} />
+        Name: <input value={props.nameValue} onChange={props.onNameChange} />
       </div>
-      <h2>Add a new</h2>
-      <form onSubmit={addName}>
-        <div>
-          Name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          Number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">Add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      {namesToShow.map(person =>
+      <div>
+        Number: <input value={props.numberValue} onChange={props.onNumberChange} />
+      </div>
+      <div>
+        <button type="submit">Add</button>
+      </div>
+    </form>
+  )
+}
+
+const PersonList = ({ persons }) => {
+  return (
+    <div>
+      {persons.map(person =>
         <p key={person.name}>
           {person.name} {person.number}
         </p>
       )}
+    </div>
+  )
+}
+
+const Filter = (props) => {
+  return (
+    <div>
+      Filter shown with: <input value={props.filterValue} onChange={props.onFilterChange} />
     </div>
   )
 }
