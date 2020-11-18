@@ -64,7 +64,8 @@ const CountryList = ({ countries, onShowDetail }) => {
 const Country = ({ country, onShowDetail }) => {
   return (
     <div>
-      {country.name} {' '}
+      {country.name}
+      {' '}
       <button type="submit" value={country.name} onClick={onShowDetail}>Show</button>
     </div>
   )
@@ -92,6 +93,8 @@ const Filter = (props) => {
   return (
     <div>
       Find countries: <input value={props.filterValue} onChange={props.onFilterChange} />
+      {' '}
+      <button type="submit" value={''} onClick={props.onFilterChange}>Clear</button>
     </div>
   )
 }
