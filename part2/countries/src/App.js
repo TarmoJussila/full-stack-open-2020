@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const App = () => {
-  const [ countries, setCountries] = useState([])
+  const [ countries, setCountries ] = useState([])
   const [ newFilter, setNewFilter ] = useState('')
 
   useEffect(() => {
@@ -28,20 +28,61 @@ const App = () => {
     <div>
       <h2>Country finder</h2>
       <Filter filterValue={newFilter} onFilterChange={handleFilterChange} />
-      <h3>Country list</h3>
       <CountryList countries={filteredCountries} />
     </div>
   )
 }
 
 const CountryList = ({ countries }) => {
+  if (countries.length > 10) {
+    return (
+      <div>
+        <p>Too many matches, specify another filter.</p>
+      </div>
+    )
+  }
+  
+  if (countries.length === 1) {
+    return (
+      <div>
+        {countries.map(country =>
+          <CountryDetail key={country.name} country={country} />
+        )}
+      </div>
+    )
+  }
+
   return (
     <div>
       {countries.map(country =>
-        <p key={country.name}>
-          {country.name} {country.number}
-        </p>
+        <Country key={country.name} country={country} />
       )}
+    </div>
+  )
+}
+
+const Country = ({ country }) => {
+  return (
+    <div>
+      <p>{country.name}</p>
+    </div>
+  )
+}
+
+const CountryDetail = ({ country }) => {
+  return (
+    <div>
+      <h3>{country.name}</h3>
+      <p>Capital: {country.capital}</p>
+      <p>Population: {country.population}</p>
+      <h4>Languages</h4>
+      {country.languages.map(language =>
+        <li key={language.name}>
+          {language.name}
+        </li>
+      )}
+      <br />
+      <img src={country.flag} alt={country.name} width="100" />
     </div>
   )
 }
