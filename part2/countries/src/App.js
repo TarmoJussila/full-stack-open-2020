@@ -28,12 +28,12 @@ const App = () => {
     <div>
       <h2>Country finder</h2>
       <Filter filterValue={newFilter} onFilterChange={handleFilterChange} />
-      <CountryList countries={filteredCountries} />
+      <CountryList countries={filteredCountries} onShowDetail={handleFilterChange} />
     </div>
   )
 }
 
-const CountryList = ({ countries }) => {
+const CountryList = ({ countries, onShowDetail }) => {
   if (countries.length > 10) {
     return (
       <div>
@@ -55,16 +55,17 @@ const CountryList = ({ countries }) => {
   return (
     <div>
       {countries.map(country =>
-        <Country key={country.name} country={country} />
+        <Country key={country.name} country={country} onShowDetail={onShowDetail} />
       )}
     </div>
   )
 }
 
-const Country = ({ country }) => {
+const Country = ({ country, onShowDetail }) => {
   return (
     <div>
-      <p>{country.name}</p>
+      {country.name} {' '}
+      <button type="submit" value={country.name} onClick={onShowDetail}>Show</button>
     </div>
   )
 }
