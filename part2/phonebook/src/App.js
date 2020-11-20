@@ -17,7 +17,7 @@ const App = () => {
       })
   }, [])
 
-  const addName = (event) => {
+  const addPerson = (event) => {
     event.preventDefault()
 
     if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase())) {
@@ -25,19 +25,23 @@ const App = () => {
       return
     }
 
-    const nameObject = {
+    const personObject = {
       name: newName,
       number: newNumber
     }
 
     personService
-      .create(nameObject)
+      .create(personObject)
       .then(returnedPerson => {
         console.log('promise fulfilled')
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
       })
+  }
+
+  const deletePerson = (id) => {
+    console.log('Delete person with id: ' + id)
   }
 
   const handleNameChange = (event) => {
@@ -64,9 +68,9 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filterValue={newFilter} onFilterChange={handleFilterChange} />
       <h3>Add a new</h3>
-      <PersonForm onSubmit={addName} nameValue={newName} numberValue={newNumber} onNameChange={handleNameChange} onNumberChange={handleNumberChange} />
+      <PersonForm onSubmit={addPerson} nameValue={newName} numberValue={newNumber} onNameChange={handleNameChange} onNumberChange={handleNumberChange} />
       <h3>Numbers</h3>
-      <PersonList persons={filteredPersons} />
+      <PersonList persons={filteredPersons} onDeletePerson={deletePerson} />
     </div>
   )
 }
@@ -87,14 +91,27 @@ const PersonForm = (props) => {
   )
 }
 
-const PersonList = ({ persons }) => {
+const PersonList = ({ persons, onDeletePerson }) => {
   return (
     <div>
       {persons.map(person =>
-        <p key={person.name}>
-          {person.name} {person.number}
-        </p>
+        <Person key={person.name} person={person} onDeletePerson={onDeletePerson} />
       )}
+    </div>
+  )
+}
+
+const Person = ({ person, onDeletePerson }) => {
+  const handleDeletePerson = () => {
+    onDeletePerson(person.id)
+  }
+
+  return (
+    <div>
+      <p>
+        {person.name} {person.number} {' '}
+        <input type="submit" value="Delete" onClick={handleDeletePerson} />
+      </p>
     </div>
   )
 }
