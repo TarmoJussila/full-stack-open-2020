@@ -40,8 +40,15 @@ const App = () => {
       })
   }
 
-  const deletePerson = (id) => {
-    console.log('Delete person with id: ' + id)
+  const deletePerson = (id, name) => {
+    if (window.confirm(`Are you sure you want to delete ${name}?`)) {
+      personService
+        .remove(id)
+        .then(() => {
+          console.log(`Deleted ${name} with id ${id}`)
+          setPersons(persons.filter(person => person.id !== id))
+        })
+    }
   }
 
   const handleNameChange = (event) => {
@@ -103,7 +110,7 @@ const PersonList = ({ persons, onDeletePerson }) => {
 
 const Person = ({ person, onDeletePerson }) => {
   const handleDeletePerson = () => {
-    onDeletePerson(person.id)
+    onDeletePerson(person.id, person.name)
   }
 
   return (
