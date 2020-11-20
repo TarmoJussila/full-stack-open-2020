@@ -21,7 +21,16 @@ const App = () => {
     event.preventDefault()
 
     if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase())) {
-      window.alert(`The name ${newName} is already added to the phonebook!`)
+      if (window.confirm(`The name ${newName} is already added to the phonebook. Do you wish to replace the old number with a new one?`)) {
+        const person = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
+        const changedPerson = { ...person, number: newNumber }
+
+        personService
+          .update(person.id, changedPerson)
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.name.toLowerCase() !== newName.toLowerCase() ? person : returnedPerson))
+          })
+      }
       return
     }
 
@@ -102,7 +111,7 @@ const PersonList = ({ persons, onDeletePerson }) => {
   return (
     <div>
       {persons.map(person =>
-        <Person key={person.name} person={person} onDeletePerson={onDeletePerson} />
+        <Person key={person.id} person={person} onDeletePerson={onDeletePerson} />
       )}
     </div>
   )
