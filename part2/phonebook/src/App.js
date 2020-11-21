@@ -15,6 +15,10 @@ const App = () => {
       .then(initialPersons => {
         setPersons(initialPersons)
       })
+      .catch(error => {
+        setErrorMessage(`Person data could not be received from the server!`)
+        setTimeout(() => { setErrorMessage(null) }, 5000)
+      })
   }, [])
 
   const addPerson = (event) => {
