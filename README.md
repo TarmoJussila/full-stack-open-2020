@@ -15,3 +15,8 @@ part2
 ```
 
 Part 3 exercise file submissions can be found in a separate [repository](https://github.com/TarmoJussila/full-stack-open-2020-backend).
+
+About the course
+---
+
+Full Stack Open is a course by University of Helsinki. More information is available at the official [course page](https://fullstackopen.com/en).
